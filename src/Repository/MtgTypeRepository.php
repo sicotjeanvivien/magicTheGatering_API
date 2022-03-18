@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\MtgType;
+use App\Repository\trait\CommonMethodsRepositoryTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -44,6 +45,8 @@ class MtgTypeRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+    use CommonMethodsRepositoryTrait;
 
     // /**
     //  * @return MtgType[] Returns an array of MtgType objects

@@ -2,9 +2,9 @@
 
 namespace App\Command;
 
-use App\Entity\MtgSet;
-use DateTime;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\MtgSupertype;
+use App\Repository\MtgSupertypeRepository;
+use mtgsdk\Supertype;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -12,24 +12,21 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use mtgsdk\Card;
-use mtgsdk\Set;
 
 #[AsCommand(
-    name: 'app:officialApi:retrieve',
+    name: 'app:apiMTG:supertype:retrieve',
     description: 'Add a short description for your command',
 )]
-class OfficialApiRetrieveCommand extends Command
+class ApiMTGSupertypeRetrieveCommand extends Command
 {
-
-    public function __construct(
-        private EntityManagerInterface $em
-    ) {
-        parent::__construct();
-    }
-
     protected function configure(): void
     {
+    }
+
+    public function __construct(
+        private MtgSupertypeRepository $mtgSupertypeRepository
+    ) {
+        parent::__construct();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -37,23 +34,14 @@ class OfficialApiRetrieveCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $io->comment("Command START");
 
-        $card = Card::find(386616);
-        dump($card);
-
-        // $sets = ;
-
-        // foreach (Set::all() as $key => $set) {
-        //     $mtgSet =  new MtgSet();
-        //     $mtgSet
-        //         ->setCode($set->code)
-        //         ->setName($set->name)
-        //         ->setReleaseDate(new DateTime($set->releaseDate))
-        //         ->setOnlineOnly(false);
-        //     $this->em->persist($mtgSet);
-        // }
-        // $this->em->flush();
-
-
+        $supertypeInBDD =  $this->mtgSupertypeRepository->customFieldFindAll("name");
+        foreach (Supertype::all() as $key => $supertype) {
+            if (!in_array($supertype , $supertypeInBDD)) {
+                $supertypeNew = new MtgSupertype();
+                $supertypeNew->setName($supertype);
+                $this->mtgSupertypeRepository->add($supertypeNew);
+            }
+        }
 
         $io->comment("Command END");
         return Command::SUCCESS;

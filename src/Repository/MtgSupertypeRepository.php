@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\MtgSupertype;
+use App\Repository\trait\CommonMethodsRepositoryTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -44,6 +45,8 @@ class MtgSupertypeRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+    use CommonMethodsRepositoryTrait;
 
     // /**
     //  * @return MtgSupertype[] Returns an array of MtgSupertype objects

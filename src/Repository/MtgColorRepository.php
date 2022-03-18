@@ -2,30 +2,30 @@
 
 namespace App\Repository;
 
-use App\Entity\MtgSetType;
+use App\Entity\MtgColor;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method MtgSetType|null find($id, $lockMode = null, $lockVersion = null)
- * @method MtgSetType|null findOneBy(array $criteria, array $orderBy = null)
- * @method MtgSetType[]    findAll()
- * @method MtgSetType[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method MtgColor|null find($id, $lockMode = null, $lockVersion = null)
+ * @method MtgColor|null findOneBy(array $criteria, array $orderBy = null)
+ * @method MtgColor[]    findAll()
+ * @method MtgColor[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class MtgSetTypeRepository extends ServiceEntityRepository
+class MtgColorRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, MtgSetType::class);
+        parent::__construct($registry, MtgColor::class);
     }
 
     /**
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function add(MtgSetType $entity, bool $flush = true): void
+    public function add(MtgColor $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
         if ($flush) {
@@ -37,7 +37,7 @@ class MtgSetTypeRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function remove(MtgSetType $entity, bool $flush = true): void
+    public function remove(MtgColor $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
         if ($flush) {
@@ -46,7 +46,7 @@ class MtgSetTypeRepository extends ServiceEntityRepository
     }
 
     // /**
-    //  * @return MtgSetType[] Returns an array of MtgSetType objects
+    //  * @return MtGColor[] Returns an array of MtGColor objects
     //  */
     /*
     public function findByExampleField($value)
@@ -63,7 +63,7 @@ class MtgSetTypeRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?MtgSetType
+    public function findOneBySomeField($value): ?MtGColor
     {
         return $this->createQueryBuilder('m')
             ->andWhere('m.exampleField = :val')
