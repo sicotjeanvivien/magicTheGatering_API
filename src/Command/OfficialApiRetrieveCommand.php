@@ -37,21 +37,21 @@ class OfficialApiRetrieveCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $io->comment("Command START");
 
-        // $card = Card::find(386616);
+        $card = Card::find(386616);
+        dump($card);
 
         // $sets = ;
 
-        foreach (Set::all() as $key => $set) {
-            $mtgSet =  new MtgSet();
-            $mtgSet
-                ->setCode($set->code)
-                ->setName($set->name)
-                ->setReleaseDate(new DateTime($set->releaseDate))
-                ->setOnlineOnly(false);
-            dump($set);
-            $this->em->persist($mtgSet);
-        }
-        $this->em->flush();
+        // foreach (Set::all() as $key => $set) {
+        //     $mtgSet =  new MtgSet();
+        //     $mtgSet
+        //         ->setCode($set->code)
+        //         ->setName($set->name)
+        //         ->setReleaseDate(new DateTime($set->releaseDate))
+        //         ->setOnlineOnly(false);
+        //     $this->em->persist($mtgSet);
+        // }
+        // $this->em->flush();
 
 
 

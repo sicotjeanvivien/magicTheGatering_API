@@ -27,6 +27,9 @@ class MtgSet
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $onlineOnly;
 
+    #[ORM\ManyToOne(targetEntity: MtgSetType::class, inversedBy: 'sets')]
+    private $mtgSetType;
+
 
     public function getCode(): ?string
     {
@@ -75,4 +78,18 @@ class MtgSet
 
         return $this;
     }
+
+    public function getMtgSetType(): ?MtgSetType
+    {
+        return $this->mtgSetType;
+    }
+
+    public function setMtgSetType(?MtgSetType $mtgSetType): self
+    {
+        $this->mtgSetType = $mtgSetType;
+
+        return $this;
+    }
 }
+
+
